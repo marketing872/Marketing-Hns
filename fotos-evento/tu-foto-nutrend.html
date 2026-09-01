@@ -1,0 +1,1432 @@
+<title>Tu Foto Nutrend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  /* ------------------------------------------------------------------
+     Tu Foto Nutrend — buscador de fotografías de evento
+     Mundo visual único (asfalto de madrugada + verde alta visibilidad).
+     Todos los colores se pintan explícitamente: la página se sostiene
+     sobre fondo claro u oscuro del visor.
+     ------------------------------------------------------------------ */
+  :root {
+    --ink:        #0A0E0B;
+    --surface:    #131914;
+    --surface-2:  #1B241D;
+    --surface-3:  #233026;
+    --line:       #2C3A2F;
+    --line-soft:  #212C24;
+    --text:       #E9F0E9;
+    --muted:      #93A697;
+    --muted-dim:  #6D7F72;
+    --accent:     #19E36A;
+    --accent-ink: #04240F;
+    --accent-dim: #0F7F3D;
+    --plate:      #F4F6F2;
+    --plate-ink:  #0E120F;
+    --alerta:     #FFC53D;
+
+    --r-sm: 4px;
+    --r-md: 10px;
+    --r-lg: 16px;
+
+    --fuente-ui: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --fuente-placa: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+    --fuente-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: var(--fuente-ui);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* textura sutil de asfalto */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(1100px 520px at 12% -10%, rgba(25,227,106,.10), transparent 60%),
+      radial-gradient(900px 480px at 100% 0%, rgba(25,227,106,.05), transparent 55%);
+  }
+
+  .capa { position: relative; z-index: 1; }
+
+  a { color: var(--accent); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--r-sm);
+  }
+
+  .oculto { display: none !important; }
+
+  .solo-lectores {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ============================ COMPUERTA ============================ */
+
+  .compuerta {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: grid;
+    place-items: center;
+    padding: 24px 20px;
+    background:
+      radial-gradient(800px 500px at 50% -10%, rgba(25,227,106,.14), transparent 60%),
+      var(--ink);
+    overflow-y: auto;
+  }
+
+  .compuerta__caja {
+    width: 100%;
+    max-width: 470px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 30px 28px 26px;
+    box-shadow: 0 30px 70px rgba(0,0,0,.55);
+  }
+
+  .marca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--fuente-placa);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .marca__punto {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(25,227,106,.16);
+    flex: none;
+  }
+
+  .compuerta__titulo {
+    font-family: var(--fuente-placa);
+    font-size: 46px;
+    line-height: .96;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    margin: 20px 0 10px;
+    color: var(--text);
+  }
+
+  .compuerta__bajada {
+    color: var(--muted);
+    font-size: 14.5px;
+    margin: 0 0 22px;
+    max-width: 40ch;
+  }
+
+  .campo { display: grid; gap: 6px; margin-bottom: 14px; }
+
+  .campo__etiqueta {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted-dim);
+  }
+
+  .campo__entrada {
+    font-family: var(--fuente-ui);
+    font-size: 15px;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 11px 13px;
+    width: 100%;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .campo__entrada::placeholder { color: var(--muted-dim); }
+  .campo__entrada:focus { border-color: var(--accent-dim); background: var(--surface-3); }
+
+  .consentimiento {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: var(--muted);
+    margin: 16px 0 20px;
+    line-height: 1.5;
+  }
+  .consentimiento input { margin-top: 3px; accent-color: var(--accent); flex: none; width: 16px; height: 16px; }
+
+  .boton {
+    font-family: var(--fuente-ui);
+    font-size: 14.5px;
+    font-weight: 600;
+    border-radius: var(--r-md);
+    padding: 12px 18px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background .15s ease, border-color .15s ease, color .15s ease, transform .1s ease;
+    text-decoration: none;
+  }
+  .boton:active { transform: translateY(1px); }
+
+  .boton--principal { background: var(--accent); color: var(--accent-ink); width: 100%; }
+  .boton--principal:hover { background: #2BF37B; }
+
+  .boton--linea {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--line);
+  }
+  .boton--linea:hover { border-color: var(--accent-dim); color: var(--accent); }
+
+  .boton--tenue {
+    background: var(--surface-2);
+    color: var(--text);
+    border-color: var(--line-soft);
+  }
+  .boton--tenue:hover { background: var(--surface-3); }
+
+  .boton[disabled], .boton[aria-disabled="true"] {
+    opacity: .45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .error {
+    color: var(--alerta);
+    font-size: 13px;
+    margin: -6px 0 12px;
+    min-height: 18px;
+  }
+
+  .compuerta__pie {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-soft);
+    font-size: 13px;
+    color: var(--muted-dim);
+    line-height: 1.55;
+  }
+  .compuerta__pie a { font-weight: 600; }
+
+  /* ============================ CABECERA ============================ */
+
+  .envoltura {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 20px 120px;
+  }
+
+  .cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 26px 0 22px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .cabecera__titulo {
+    font-family: var(--fuente-placa);
+    font-size: 40px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 12px 0 6px;
+    letter-spacing: -.005em;
+  }
+
+  .cabecera__datos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-family: var(--fuente-mono);
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .cabecera__datos span { white-space: nowrap; }
+
+  .contador {
+    text-align: right;
+    font-family: var(--fuente-placa);
+    line-height: 1;
+  }
+  .contador__cifra {
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .contador__pie {
+    font-size: 11.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted-dim);
+    font-family: var(--fuente-ui);
+    font-weight: 600;
+    margin-top: 6px;
+  }
+
+  .aviso-demo {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin: 18px 0 0;
+    padding: 11px 14px;
+    background: rgba(255,197,61,.08);
+    border: 1px solid rgba(255,197,61,.28);
+    border-radius: var(--r-md);
+    color: var(--alerta);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .aviso-demo strong { color: var(--alerta); }
+
+  /* ============================ BUSCADOR ============================ */
+
+  .buscador {
+    padding: 30px 0 8px;
+    display: grid;
+    gap: 18px;
+  }
+
+  .placa-envoltura {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+  }
+
+  /* la placa de dorsal: el objeto que el corredor lleva en la bicicleta */
+  .placa {
+    position: relative;
+    background: var(--plate);
+    border-radius: 6px;
+    padding: 10px 14px 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.45);
+    display: grid;
+    gap: 2px;
+    min-width: 244px;
+  }
+  .placa::before,
+  .placa::after {
+    content: "";
+    position: absolute;
+    top: 9px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #B9C0B6;
+  }
+  .placa::before { left: 9px; }
+  .placa::after { right: 9px; }
+
+  .placa__rotulo {
+    font-family: var(--fuente-ui);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #6E7A6D;
+    text-align: center;
+  }
+
+  .placa__entrada {
+    font-family: var(--fuente-placa);
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    color: var(--plate-ink);
+    background: transparent;
+    border: 0;
+    width: 100%;
+    padding: 0;
+    letter-spacing: .02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .placa__entrada::placeholder { color: #C3CAC1; }
+  .placa__entrada:focus { outline: none; }
+  .placa:focus-within { box-shadow: 0 0 0 3px var(--accent), 0 12px 30px rgba(0,0,0,.45); }
+
+  .placa-ayuda {
+    max-width: 34ch;
+    color: var(--muted);
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .placa-ayuda strong { color: var(--text); font-weight: 600; }
+
+  .filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .selector, .campo-texto {
+    font-family: var(--fuente-ui);
+    font-size: 13.5px;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 9px 14px;
+    cursor: pointer;
+  }
+  .campo-texto { cursor: text; min-width: 210px; }
+  .selector:focus, .campo-texto:focus { border-color: var(--accent-dim); outline: none; }
+  .campo-texto::placeholder { color: var(--muted-dim); }
+
+  .interruptor {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    color: var(--muted);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 14px 8px 12px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .interruptor input { accent-color: var(--accent); width: 15px; height: 15px; }
+  .interruptor:hover { border-color: var(--line); color: var(--text); }
+
+  .limpiar {
+    background: none;
+    border: 0;
+    color: var(--muted-dim);
+    font-family: var(--fuente-ui);
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding: 6px;
+  }
+  .limpiar:hover { color: var(--text); }
+
+  /* ============================ RESULTADOS ============================ */
+
+  .barra-resultados {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin: 26px 0 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .barra-resultados__titulo {
+    font-family: var(--fuente-placa);
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .barra-resultados__titulo em {
+    font-style: normal;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rejilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(226px, 1fr));
+    gap: 16px;
+  }
+
+  .tarjeta {
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .tarjeta:hover { border-color: var(--line); transform: translateY(-2px); }
+  .tarjeta--elegida { border-color: var(--accent); }
+
+  .tarjeta__lienzo {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    background: var(--surface-2);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .tarjeta__lienzo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .marca-agua {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--fuente-mono);
+    font-size: 12px;
+    color: var(--muted-dim);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,.022) 0 12px,
+      transparent 12px 24px
+    );
+    text-align: center;
+    padding: 10px;
+  }
+
+  .miniplaca {
+    position: absolute;
+    left: 10px; bottom: 10px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    max-width: calc(100% - 20px);
+  }
+  .miniplaca span {
+    font-family: var(--fuente-placa);
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1;
+    background: var(--plate);
+    color: var(--plate-ink);
+    padding: 4px 8px 5px;
+    border-radius: 3px;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 3px 10px rgba(0,0,0,.4);
+  }
+  .miniplaca span.sin {
+    background: var(--surface-3);
+    color: var(--muted);
+    font-family: var(--fuente-ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 6px 9px;
+  }
+
+  .casilla-elegir {
+    position: absolute;
+    top: 9px; right: 9px;
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    background: rgba(10,14,11,.72);
+    border: 1px solid var(--line);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  .casilla-elegir input { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; }
+
+  .tarjeta__cuerpo {
+    padding: 11px 12px 12px;
+    display: grid;
+    gap: 9px;
+  }
+
+  .tarjeta__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-family: var(--fuente-mono);
+    font-size: 11.5px;
+    color: var(--muted-dim);
+  }
+  .tarjeta__meta span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tarjeta__tramo {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .tarjeta__acciones { display: flex; gap: 7px; }
+  .tarjeta__acciones .boton { flex: 1; padding: 8px 10px; font-size: 12.5px; border-radius: 7px; }
+  .tarjeta__acciones .boton--icono { flex: none; padding: 8px 10px; }
+
+  .vacio {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    border: 1px dashed var(--line);
+    border-radius: var(--r-lg);
+    background: rgba(19,25,20,.5);
+  }
+  .vacio__titulo {
+    font-family: var(--fuente-placa);
+    font-size: 26px;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .vacio p { max-width: 46ch; margin: 0 auto 16px; font-size: 14px; }
+
+  .mas {
+    display: grid;
+    place-items: center;
+    margin-top: 22px;
+  }
+
+  /* ============================ SELFIE v2 ============================ */
+
+  .selfie {
+    margin-top: 46px;
+    padding: 22px;
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-lg);
+    background: linear-gradient(180deg, var(--surface) 0%, rgba(19,25,20,.35) 100%);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .selfie__texto { max-width: 52ch; }
+  .selfie__insignia {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--alerta);
+    border: 1px solid rgba(255,197,61,.35);
+    border-radius: 999px;
+    padding: 3px 9px;
+    margin-bottom: 9px;
+  }
+  .selfie__titulo {
+    font-family: var(--fuente-placa);
+    font-size: 26px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+  }
+  .selfie p { color: var(--muted); font-size: 13.5px; margin: 0; }
+
+  /* ============================ BARRA SELECCIÓN ============================ */
+
+  .barra-seleccion {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 30;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 9px 10px 9px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.6);
+    max-width: calc(100vw - 32px);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .barra-seleccion__cifra {
+    font-family: var(--fuente-placa);
+    font-size: 17px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    white-space: nowrap;
+  }
+  .barra-seleccion__cifra em { font-style: normal; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .barra-seleccion .boton { padding: 8px 14px; font-size: 13px; }
+
+  /* ============================ PIE ============================ */
+
+  .pie {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted-dim);
+    font-size: 13px;
+  }
+  .pie a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .pie a:hover { color: var(--accent); border-color: var(--accent-dim); }
+
+  .aviso-flotante {
+    position: fixed;
+    left: 50%;
+    bottom: 88px;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--plate);
+    color: var(--plate-ink);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 999px;
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+    box-shadow: 0 14px 34px rgba(0,0,0,.5);
+  }
+  .aviso-flotante.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 640px) {
+    .cabecera { align-items: flex-start; }
+    .cabecera__titulo { font-size: 32px; }
+    .contador { text-align: left; }
+    .contador__cifra { font-size: 34px; }
+    .placa { min-width: 100%; }
+    .rejilla { grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 12px; }
+    .tarjeta__acciones { flex-wrap: wrap; }
+    .tarjeta__acciones .boton--principal { flex: 1 1 100%; }
+    .tarjeta__acciones .boton--tenue { flex: 1 1 auto; }
+    .tarjeta__acciones .boton--icono { flex: 0 0 auto; }
+    .tarjeta__meta { font-size: 10.5px; }
+    .campo-texto { min-width: 100%; }
+    .selector { flex: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .tarjeta:hover { transform: none; }
+  }
+</style>
+
+<!-- ===================== COMPUERTA DE ACCESO ===================== -->
+<div class="compuerta capa" id="compuerta">
+  <div class="compuerta__caja">
+    <div class="marca"><span class="marca__punto"></span> Nutrend Chile</div>
+
+    <h1 class="compuerta__titulo">Encuentra tu foto de carrera</h1>
+    <p class="compuerta__bajada">
+      Las 700 fotografías del evento son gratis para la comunidad Nutrend.
+      Ingresa el correo con el que te suscribiste y entra a la galería.
+    </p>
+
+    <form id="formularioAcceso" novalidate>
+      <div class="campo">
+        <label class="campo__etiqueta" for="entradaNombre">Nombre y apellido</label>
+        <input class="campo__entrada" id="entradaNombre" name="nombre" type="text"
+               autocomplete="name" placeholder="Camila Rojas">
+      </div>
+
+      <div class="campo">
+        <label class="campo__etiqueta" for="entradaCorreo">Correo de tu suscripción</label>
+        <input class="campo__entrada" id="entradaCorreo" name="correo" type="email"
+               autocomplete="email" inputmode="email" placeholder="camila@correo.cl">
+      </div>
+
+      <p class="error" id="errorAcceso" role="alert"></p>
+
+      <label class="consentimiento">
+        <input type="checkbox" id="entradaConsentimiento">
+        <span>Autorizo a Nutrend Chile a usar mi correo para enviarme las fotos del evento y novedades de la marca. Puedo darme de baja cuando quiera.</span>
+      </label>
+
+      <button class="boton boton--principal" type="submit">Entrar a la galería</button>
+    </form>
+
+    <div class="compuerta__pie">
+      ¿Todavía no eres parte?
+      <a id="enlaceSuscripcion" href="#" target="_blank" rel="noopener">Suscríbete gratis en Nutrend.cl</a>
+      y vuelve a esta página con tu correo.
+    </div>
+  </div>
+</div>
+
+<!-- ===================== APLICACIÓN ===================== -->
+<div class="capa oculto" id="aplicacion">
+  <div class="envoltura">
+
+    <header class="cabecera">
+      <div>
+        <div class="marca"><span class="marca__punto"></span> Nutrend Chile · Galería oficial</div>
+        <h1 class="cabecera__titulo" id="tituloEvento">Evento</h1>
+        <div class="cabecera__datos" id="datosEvento"></div>
+      </div>
+      <div class="contador">
+        <div class="contador__cifra" id="cifraTotal">0</div>
+        <div class="contador__pie">Fotografías</div>
+      </div>
+    </header>
+
+    <div class="aviso-demo oculto" id="avisoDemo">
+      <span aria-hidden="true">▲</span>
+      <span><strong>Datos de demostración.</strong> Las 700 fichas de abajo son de ejemplo, generadas para probar el buscador a escala real. Al reemplazar el bloque <code>FOTOS</code> por el etiquetado real, este aviso desaparece solo.</span>
+    </div>
+
+    <section class="buscador" aria-label="Buscar fotografías">
+      <div class="placa-envoltura">
+        <div class="placa">
+          <label class="placa__rotulo" for="entradaDorsal">Número de dorsal</label>
+          <input class="placa__entrada" id="entradaDorsal" type="text" inputmode="numeric"
+                 maxlength="5" placeholder="000" autocomplete="off"
+                 aria-describedby="ayudaPlaca">
+        </div>
+        <p class="placa-ayuda" id="ayudaPlaca">
+          Escribe el número que llevabas en la bicicleta. También puedes buscar por
+          <strong>nombre</strong> o filtrar por tramo del recorrido si no recuerdas tu dorsal.
+        </p>
+      </div>
+
+      <div class="filtros">
+        <input class="campo-texto" id="entradaNombreBusqueda" type="search"
+               placeholder="Buscar por nombre del corredor" aria-label="Buscar por nombre del corredor">
+
+        <select class="selector" id="selectorTramo" aria-label="Filtrar por tramo">
+          <option value="">Todos los tramos</option>
+        </select>
+
+        <select class="selector" id="selectorCategoria" aria-label="Filtrar por categoría">
+          <option value="">Todas las categorías</option>
+        </select>
+
+        <label class="interruptor">
+          <input type="checkbox" id="interruptorSinDorsal">
+          Solo fotos sin dorsal legible
+        </label>
+
+        <button class="limpiar oculto" id="botonLimpiar" type="button">Limpiar búsqueda</button>
+      </div>
+    </section>
+
+    <div class="barra-resultados">
+      <div class="barra-resultados__titulo" id="tituloResultados">
+        <em>0</em> fotografías
+      </div>
+      <div style="color:var(--muted-dim); font-size:13px;" id="pistaResultados"></div>
+    </div>
+
+    <p class="solo-lectores" role="status" aria-live="polite" id="anuncio"></p>
+
+    <div class="rejilla" id="rejilla"></div>
+
+    <div class="vacio oculto" id="vacio">
+      <div class="vacio__titulo">Sin resultados</div>
+      <p id="textoVacio"></p>
+      <button class="boton boton--linea" id="botonVerTodas" type="button">Ver las 700 fotografías</button>
+    </div>
+
+    <div class="mas oculto" id="contenedorMas">
+      <button class="boton boton--tenue" id="botonMas" type="button">Cargar más fotografías</button>
+    </div>
+
+    <section class="selfie" aria-labelledby="tituloSelfie">
+      <div class="selfie__texto">
+        <span class="selfie__insignia">En preparación</span>
+        <h2 class="selfie__titulo" id="tituloSelfie">Búsqueda por rostro</h2>
+        <p>
+          Estamos entrenando el reconocimiento facial para que subas una selfie y el buscador
+          encuentre tus fotos aunque el dorsal salga tapado o borroso. Llega en la próxima
+          edición: mientras tanto, busca por número o revisa el tramo donde ibas.
+        </p>
+      </div>
+      <button class="boton boton--linea" type="button" aria-disabled="true">Subir una selfie</button>
+    </section>
+
+    <footer class="pie">
+      <div>Fotografía oficial del evento · <span id="pieFotografo"></span></div>
+      <div>
+        <a id="pieCarpeta" href="#" target="_blank" rel="noopener">Abrir carpeta completa</a>
+        &nbsp;·&nbsp;
+        <a id="pieWeb" href="#" target="_blank" rel="noopener">Nutrend.cl</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="barra-seleccion oculto" id="barraSeleccion">
+    <div class="barra-seleccion__cifra"><em id="cifraSeleccion">0</em> seleccionadas</div>
+    <button class="boton boton--tenue" id="botonCopiar" type="button">Copiar enlaces</button>
+    <button class="boton boton--tenue oculto" id="botonDescargarLista" type="button">Descargar lista</button>
+    <button class="boton boton--tenue" id="botonCompartir" type="button">WhatsApp</button>
+    <button class="boton boton--linea" id="botonDeseleccionar" type="button">Quitar</button>
+  </div>
+</div>
+
+<div class="aviso-flotante" id="avisoFlotante" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ==================================================================
+     1. CONFIGURACIÓN — lo único que hay que editar para cada evento
+     ================================================================== */
+
+  const CONFIG = {
+    evento: {
+      nombre: "Gran Fondo Nutrend 2026",
+      lugar: "Buin, Región Metropolitana",
+      fecha: "Domingo 24 de agosto de 2026",
+      fotografo: "Equipo HNS Nutrition"
+    },
+    // Carpeta pública de Google Drive o Dropbox con las 700 fotos
+    carpetaDrive: "https://drive.google.com/drive/folders/REEMPLAZAR_ID_CARPETA",
+    // Formulario de suscripción de Nutrend.cl
+    urlSuscripcion: "https://nutrend.cl/suscribete",
+    urlWeb: "https://nutrend.cl",
+    // Pasa a false cuando cargues el etiquetado real en FOTOS
+    modoDemo: true,
+    porTanda: 48
+  };
+
+  /* ==================================================================
+     2. DATOS — reemplazar por el resultado del etiquetado con IA
+     ------------------------------------------------------------------
+     Estructura de cada fotografía:
+       codigo:     nombre del archivo original            "HNS_0231.jpg"
+       driveId:    ID del archivo en Google Drive         "1a2B3c..."
+       dorsales:   números detectados, puede ir vacío     [231, 87]
+       nombres:    nombres asociados (opcional)           ["Camila Rojas"]
+       tramo:      punto del recorrido                    "Subida El Peral"
+       categoria:  categoría de carrera (opcional)        "Master A"
+       hora:       hora de captura                        "10:42"
+     ================================================================== */
+
+  let FOTOS = [];
+
+  /* ==================================================================
+     3. UTILIDADES
+     ================================================================== */
+
+  const $ = (sel) => document.querySelector(sel);
+
+  const normalizar = (texto) =>
+    (texto || "")
+      .toString()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim();
+
+  const escapar = (texto) =>
+    (texto || "").toString().replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    })[c]);
+
+  const enlaceVer = (foto) =>
+    foto.driveId ? "https://drive.google.com/file/d/" + foto.driveId + "/view" : CONFIG.carpetaDrive;
+
+  const enlaceDescarga = (foto) =>
+    foto.driveId ? "https://drive.google.com/uc?export=download&id=" + foto.driveId : CONFIG.carpetaDrive;
+
+  const guardarLocal = (clave, valor) => {
+    try { localStorage.setItem(clave, JSON.stringify(valor)); } catch (e) { /* modo privado */ }
+  };
+
+  const leerLocal = (clave) => {
+    try {
+      const crudo = localStorage.getItem(clave);
+      return crudo ? JSON.parse(crudo) : null;
+    } catch (e) { return null; }
+  };
+
+  let temporizadorAviso = null;
+  function avisar(mensaje) {
+    const aviso = $("#avisoFlotante");
+    aviso.textContent = mensaje;
+    aviso.classList.add("visible");
+    clearTimeout(temporizadorAviso);
+    temporizadorAviso = setTimeout(() => aviso.classList.remove("visible"), 2600);
+  }
+
+  /* ==================================================================
+     4. DATOS DE DEMOSTRACIÓN — 700 fichas a escala real
+     ================================================================== */
+
+  function generarDemo() {
+    // generador con semilla fija: la demo se ve igual en cada visita
+    let semilla = 20260824;
+    const azar = () => {
+      semilla = (semilla * 1664525 + 1013904223) % 4294967296;
+      return semilla / 4294967296;
+    };
+    const elegir = (lista) => lista[Math.floor(azar() * lista.length)];
+
+    const tramos = [
+      "Largada · Plaza de Buin",
+      "Km 12 · Camino Padre Hurtado",
+      "Subida El Peral",
+      "Km 34 · Ruta de los viñedos",
+      "Última curva",
+      "Meta · Arco Nutrend"
+    ];
+    const categorias = ["Elite", "Master A", "Master B", "Damas", "Juvenil", "Cicloturismo"];
+    const nombres = [
+      "Camila Rojas", "Matías Fuentes", "Valentina Soto", "Ignacio Herrera",
+      "Fernanda Muñoz", "Diego Cárdenas", "Josefa Vidal", "Sebastián Lagos",
+      "Antonia Pérez", "Cristóbal Reyes", "Javiera Núñez", "Tomás Aguilera"
+    ];
+
+    const lista = [];
+    for (let i = 1; i <= 700; i++) {
+      const sinDorsal = azar() < 0.06;               // ~6% ilegibles: pasa en toda carrera
+      const cuantos = azar() < 0.22 ? 2 : 1;          // pelotón: a veces dos corredores
+      const dorsales = [];
+      if (!sinDorsal) {
+        for (let d = 0; d < cuantos; d++) {
+          dorsales.push(1 + Math.floor(azar() * 450));
+        }
+      }
+      const minutos = 540 + Math.floor(azar() * 270); // 09:00 a 13:30
+      const hora =
+        String(Math.floor(minutos / 60)).padStart(2, "0") + ":" +
+        String(minutos % 60).padStart(2, "0");
+
+      lista.push({
+        codigo: "HNS_" + String(i).padStart(4, "0") + ".jpg",
+        driveId: "",
+        dorsales: dorsales,
+        nombres: azar() < 0.3 ? [elegir(nombres)] : [],
+        tramo: elegir(tramos),
+        categoria: elegir(categorias),
+        hora: hora
+      });
+    }
+    lista.sort((a, b) => a.hora.localeCompare(b.hora));
+    return lista;
+  }
+
+  /* ==================================================================
+     5. ESTADO
+     ================================================================== */
+
+  const estado = {
+    dorsal: "",
+    nombre: "",
+    tramo: "",
+    categoria: "",
+    soloSinDorsal: false,
+    visibles: CONFIG.porTanda,
+    seleccion: new Set(),
+    resultados: []
+  };
+
+  const CLAVE_ACCESO = "nutrend_galeria_acceso_v1";
+
+  /* ==================================================================
+     6. COMPUERTA DE ACCESO
+     ================================================================== */
+
+  function iniciarCompuerta() {
+    $("#enlaceSuscripcion").href = CONFIG.urlSuscripcion;
+
+    const acceso = leerLocal(CLAVE_ACCESO);
+    if (acceso && acceso.correo) {
+      abrirGaleria();
+      return;
+    }
+
+    $("#formularioAcceso").addEventListener("submit", (evento) => {
+      evento.preventDefault();
+      const nombre = $("#entradaNombre").value.trim();
+      const correo = $("#entradaCorreo").value.trim();
+      const consiente = $("#entradaConsentimiento").checked;
+      const error = $("#errorAcceso");
+
+      if (nombre.length < 3) {
+        error.textContent = "Escribe tu nombre y apellido para identificar tus fotos.";
+        $("#entradaNombre").focus();
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo)) {
+        error.textContent = "Revisa el correo: parece que le falta algo.";
+        $("#entradaCorreo").focus();
+        return;
+      }
+      if (!consiente) {
+        error.textContent = "Necesitamos tu autorización para enviarte las fotos.";
+        $("#entradaConsentimiento").focus();
+        return;
+      }
+
+      error.textContent = "";
+      guardarLocal(CLAVE_ACCESO, { nombre: nombre, correo: correo, fecha: new Date().toISOString() });
+      abrirGaleria(nombre);
+    });
+  }
+
+  function abrirGaleria(nombre) {
+    $("#compuerta").classList.add("oculto");
+    $("#aplicacion").classList.remove("oculto");
+    iniciarGaleria();
+    if (nombre) avisar("Bienvenida a la galería, " + nombre.split(" ")[0]);
+    $("#entradaDorsal").focus();
+  }
+
+  /* ==================================================================
+     7. GALERÍA
+     ================================================================== */
+
+  let galeriaLista = false;
+
+  function iniciarGaleria() {
+    if (galeriaLista) return;
+    galeriaLista = true;
+
+    if (CONFIG.modoDemo && FOTOS.length === 0) {
+      FOTOS = generarDemo();
+      $("#avisoDemo").classList.remove("oculto");
+    }
+
+    // Tolerar planillas incompletas: cualquier campo ausente toma un valor seguro
+    FOTOS = FOTOS.map((foto, indice) => ({
+      codigo: foto.codigo || "FOTO_" + String(indice + 1).padStart(4, "0"),
+      driveId: foto.driveId || "",
+      dorsales: Array.isArray(foto.dorsales)
+        ? foto.dorsales.filter((d) => d !== null && d !== undefined && d !== "")
+        : (foto.dorsal ? [foto.dorsal] : []),
+      nombres: Array.isArray(foto.nombres) ? foto.nombres : (foto.nombre ? [foto.nombre] : []),
+      tramo: foto.tramo || "",
+      categoria: foto.categoria || "",
+      hora: foto.hora || "",
+      miniatura: foto.miniatura || null
+    }));
+
+    $("#tituloEvento").textContent = CONFIG.evento.nombre;
+    $("#datosEvento").innerHTML =
+      "<span>" + escapar(CONFIG.evento.fecha) + "</span>" +
+      "<span>" + escapar(CONFIG.evento.lugar) + "</span>";
+    $("#cifraTotal").textContent = FOTOS.length;
+    $("#pieFotografo").textContent = CONFIG.evento.fotografo;
+    $("#pieCarpeta").href = CONFIG.carpetaDrive;
+    $("#pieWeb").href = CONFIG.urlWeb;
+
+    poblarSelector("#selectorTramo", "tramo");
+    poblarSelector("#selectorCategoria", "categoria");
+
+    conectarEventos();
+    prepararDescargas();
+    filtrar();
+  }
+
+  function poblarSelector(selector, campo) {
+    const nodo = $(selector);
+    const valores = [...new Set(FOTOS.map((f) => f[campo]).filter(Boolean))].sort();
+    valores.forEach((valor) => {
+      const opcion = document.createElement("option");
+      opcion.value = valor;
+      opcion.textContent = valor;
+      nodo.appendChild(opcion);
+    });
+    nodo.classList.toggle("oculto", valores.length === 0);
+  }
+
+  function conectarEventos() {
+    $("#entradaDorsal").addEventListener("input", (e) => {
+      e.target.value = e.target.value.replace(/\D/g, "");
+      estado.dorsal = e.target.value;
+      filtrar();
+    });
+
+    $("#entradaNombreBusqueda").addEventListener("input", (e) => {
+      estado.nombre = e.target.value;
+      filtrar();
+    });
+
+    $("#selectorTramo").addEventListener("change", (e) => {
+      estado.tramo = e.target.value;
+      filtrar();
+    });
+
+    $("#selectorCategoria").addEventListener("change", (e) => {
+      estado.categoria = e.target.value;
+      filtrar();
+    });
+
+    $("#interruptorSinDorsal").addEventListener("change", (e) => {
+      estado.soloSinDorsal = e.target.checked;
+      filtrar();
+    });
+
+    $("#botonLimpiar").addEventListener("click", limpiar);
+    $("#botonVerTodas").addEventListener("click", limpiar);
+
+    $("#botonMas").addEventListener("click", () => {
+      estado.visibles += CONFIG.porTanda;
+      pintar();
+    });
+
+    $("#botonDeseleccionar").addEventListener("click", () => {
+      estado.seleccion.clear();
+      pintar();
+    });
+
+    $("#botonCopiar").addEventListener("click", copiarEnlaces);
+    $("#botonCompartir").addEventListener("click", compartirWhatsApp);
+  }
+
+  function limpiar() {
+    estado.dorsal = "";
+    estado.nombre = "";
+    estado.tramo = "";
+    estado.categoria = "";
+    estado.soloSinDorsal = false;
+    $("#entradaDorsal").value = "";
+    $("#entradaNombreBusqueda").value = "";
+    $("#selectorTramo").value = "";
+    $("#selectorCategoria").value = "";
+    $("#interruptorSinDorsal").checked = false;
+    filtrar();
+    $("#entradaDorsal").focus();
+  }
+
+  /* ==================================================================
+     8. BÚSQUEDA
+     ================================================================== */
+
+  function filtrar() {
+    const dorsal = estado.dorsal;
+    const nombre = normalizar(estado.nombre);
+
+    let lista = FOTOS.filter((foto) => {
+      if (estado.tramo && foto.tramo !== estado.tramo) return false;
+      if (estado.categoria && foto.categoria !== estado.categoria) return false;
+      if (estado.soloSinDorsal && foto.dorsales.length > 0) return false;
+      if (nombre && !(foto.nombres || []).some((n) => normalizar(n).includes(nombre))) return false;
+      if (dorsal) {
+        const coincide = foto.dorsales.some(
+          (d) => String(d) === dorsal || String(d).padStart(dorsal.length, "0") === dorsal
+        );
+        const parcial = foto.dorsales.some((d) => String(d).includes(dorsal));
+        if (!coincide && !parcial) return false;
+      }
+      return true;
+    });
+
+    // coincidencia exacta del dorsal primero, luego por hora
+    if (dorsal) {
+      lista.sort((a, b) => {
+        const exactaA = a.dorsales.some((d) => String(d) === dorsal) ? 0 : 1;
+        const exactaB = b.dorsales.some((d) => String(d) === dorsal) ? 0 : 1;
+        if (exactaA !== exactaB) return exactaA - exactaB;
+        return a.hora.localeCompare(b.hora);
+      });
+    }
+
+    estado.resultados = lista;
+    estado.visibles = CONFIG.porTanda;
+    pintar();
+  }
+
+  const hayFiltros = () =>
+    estado.dorsal || estado.nombre || estado.tramo || estado.categoria || estado.soloSinDorsal;
+
+  /* ==================================================================
+     9. PINTADO
+     ================================================================== */
+
+  function pintar() {
+    const total = estado.resultados.length;
+    const rejilla = $("#rejilla");
+    const tanda = estado.resultados.slice(0, estado.visibles);
+
+    $("#tituloResultados").innerHTML =
+      "<em>" + total + "</em> " + (total === 1 ? "fotografía" : "fotografías") +
+      (estado.dorsal ? " del dorsal " + escapar(estado.dorsal) : "");
+
+    $("#pistaResultados").textContent =
+      total > tanda.length ? "Mostrando " + tanda.length + " de " + total : "";
+
+    $("#botonLimpiar").classList.toggle("oculto", !hayFiltros());
+    $("#vacio").classList.toggle("oculto", total !== 0);
+    $("#contenedorMas").classList.toggle("oculto", total <= tanda.length);
+
+    if (total === 0) {
+      rejilla.innerHTML = "";
+      $("#textoVacio").textContent = estado.dorsal
+        ? "No encontramos fotos del dorsal " + estado.dorsal + ". Puede que el número saliera tapado: prueba con el filtro de fotos sin dorsal legible o busca por el tramo donde ibas."
+        : "Ningún resultado con esos filtros. Prueba quitando alguno.";
+      $("#anuncio").textContent = "Sin resultados";
+      actualizarBarra();
+      return;
+    }
+
+    rejilla.innerHTML = tanda.map(tarjeta).join("");
+
+    rejilla.querySelectorAll("[data-elegir]").forEach((casilla) => {
+      casilla.addEventListener("change", (e) => {
+        const codigo = e.target.getAttribute("data-elegir");
+        if (e.target.checked) estado.seleccion.add(codigo);
+        else estado.seleccion.delete(codigo);
+        e.target.closest(".tarjeta").classList.toggle("tarjeta--elegida", e.target.checked);
+        actualizarBarra();
+      });
+    });
+
+    rejilla.querySelectorAll("[data-copiar]").forEach((boton) => {
+      boton.addEventListener("click", () => {
+        const foto = FOTOS.find((f) => f.codigo === boton.getAttribute("data-copiar"));
+        if (foto) copiarTexto(enlaceVer(foto), "Enlace copiado");
+      });
+    });
+
+    $("#anuncio").textContent = total + " fotografías encontradas";
+    actualizarBarra();
+  }
+
+  function tarjeta(foto) {
+    const elegida = estado.seleccion.has(foto.codigo);
+    const placas = foto.dorsales.length
+      ? foto.dorsales.map((d) => "<span>" + d + "</span>").join("")
+      : '<span class="sin">Sin dorsal</span>';
+
+    const lienzo = foto.miniatura
+      ? '<img src="' + escapar(foto.miniatura) + '" alt="Fotografía ' + escapar(foto.codigo) + '" loading="lazy">'
+      : '<div class="marca-agua">' + escapar(foto.codigo) + "</div>";
+
+    return (
+      '<article class="tarjeta' + (elegida ? " tarjeta--elegida" : "") + '">' +
+        '<div class="tarjeta__lienzo">' +
+          lienzo +
+          '<div class="miniplaca">' + placas + "</div>" +
+          '<label class="casilla-elegir" title="Seleccionar">' +
+            '<input type="checkbox" data-elegir="' + escapar(foto.codigo) + '"' +
+              (elegida ? " checked" : "") +
+              ' aria-label="Seleccionar ' + escapar(foto.codigo) + '">' +
+          "</label>" +
+        "</div>" +
+        '<div class="tarjeta__cuerpo">' +
+          '<div class="tarjeta__meta">' +
+            "<span>" + escapar(foto.hora) + "</span>" +
+            "<span>" + escapar(foto.codigo.replace(/\.\w+$/, "")) + "</span>" +
+          "</div>" +
+          '<div class="tarjeta__tramo">' + escapar(foto.tramo || "") + "</div>" +
+          '<div class="tarjeta__acciones">' +
+            '<a class="boton boton--principal" href="' + escapar(enlaceDescarga(foto)) + '" target="_blank" rel="noopener">Descargar</a>' +
+            '<a class="boton boton--tenue" href="' + escapar(enlaceVer(foto)) + '" target="_blank" rel="noopener">Ver</a>' +
+            '<button class="boton boton--tenue boton--icono" type="button" data-copiar="' + escapar(foto.codigo) + '" title="Copiar enlace" aria-label="Copiar enlace de ' + escapar(foto.codigo) + '">⧉</button>' +
+          "</div>" +
+        "</div>" +
+      "</article>"
+    );
+  }
+
+  /* ==================================================================
+     10. SELECCIÓN MÚLTIPLE
+     ================================================================== */
+
+  function actualizarBarra() {
+    const cantidad = estado.seleccion.size;
+    $("#barraSeleccion").classList.toggle("oculto", cantidad === 0);
+    $("#cifraSeleccion").textContent = cantidad;
+  }
+
+  const fotosSeleccionadas = () =>
+    FOTOS.filter((f) => estado.seleccion.has(f.codigo));
+
+  function textoEnlaces() {
+    return fotosSeleccionadas()
+      .map((f) => f.codigo + "  " + enlaceVer(f))
+      .join("\n");
+  }
+
+  function copiarTexto(texto, mensaje) {
+    const respaldo = () => {
+      const area = document.createElement("textarea");
+      area.value = texto;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      try { document.execCommand("copy"); avisar(mensaje); }
+      catch (e) { avisar("No se pudo copiar en este navegador"); }
+      document.body.removeChild(area);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(() => avisar(mensaje)).catch(respaldo);
+    } else {
+      respaldo();
+    }
+  }
+
+  function copiarEnlaces() {
+    copiarTexto(textoEnlaces(), estado.seleccion.size + " enlaces copiados");
+  }
+
+  function compartirWhatsApp() {
+    const mensaje =
+      "Mis fotos del " + CONFIG.evento.nombre + ":\n\n" + textoEnlaces();
+    window.open("https://wa.me/?text=" + encodeURIComponent(mensaje), "_blank", "noopener");
+  }
+
+  /* ==================================================================
+     11. DESCARGA DE LISTA (capacidad opcional del visor)
+     ================================================================== */
+
+  async function prepararDescargas() {
+    if (!window.claude || typeof window.claude.use !== "function") return;
+    let descargas = null;
+    try { descargas = await window.claude.use("downloads"); } catch (e) { return; }
+    if (!descargas) return;
+
+    const boton = $("#botonDescargarLista");
+    boton.classList.remove("oculto");
+    boton.addEventListener("click", async () => {
+      const contenido =
+        CONFIG.evento.nombre + "\n" +
+        CONFIG.evento.fecha + "\n\n" +
+        textoEnlaces() + "\n";
+      try {
+        await descargas.save({ filename: "mis-fotos-nutrend.txt", data: contenido });
+      } catch (e) {
+        avisar("La descarga se canceló");
+      }
+    });
+  }
+
+  /* ==================================================================
+     12. ARRANQUE
+     ================================================================== */
+
+  iniciarCompuerta();
+})();
+</script>
