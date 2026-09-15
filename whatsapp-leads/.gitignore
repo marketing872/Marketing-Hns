@@ -1,0 +1,13 @@
+# Nunca subir datos reales de clientes al repositorio
+*.xlsx
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.txt
+!requirements.txt
+_extraido/
+conversaciones/
+transcripciones*/
+chats/
+__pycache__/
+*.pyc
