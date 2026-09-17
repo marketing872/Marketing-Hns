@@ -1,4 +1,6 @@
-# Perfil personal de LinkedIn — Marketing Digital HNS
+# Perfil personal de LinkedIn — Rodrigo Andrés Contreras Faine
+
+`linkedin.com/in/rodrigoandrescontrerasfaine` · Marketing Digital, HNS Nutrition
 
 **Objetivo:** marca personal y empleabilidad. El perfil debe leerse como el de un
 especialista en marketing digital con dominio real de la categoría de nutrición
@@ -18,7 +20,7 @@ titular. Si esos tres no funcionan, el resto del perfil no existe.
 |---|---|---|
 | Foto de perfil | 400x400 px mín., cara ocupando ~60% del cuadro, fondo limpio | Foto actual, ropa de trabajo real, buena luz. Nada de foto recortada de un grupo |
 | Banner | 1584x396 px | Ver sección 2 |
-| URL personalizada | `linkedin.com/in/nombre-apellido-mkt` | Editar en "Editar perfil público y URL". Sirve para firma de correo y CV |
+| URL personalizada | 3-30 car., legible y dictable | Hoy tienes `/in/rodrigoandrescontrerasfaine`: 27 caracteres sin separadores, ilegible de un vistazo e imposible de dictar por teléfono. Cámbiala a `/in/rodrigo-contreras-faine` o, mejor para marca personal, `/in/rodrigo-contreras-mkt`. Se edita en "Editar perfil público y URL" (arriba a la derecha del perfil) |
 | Ubicación | Santiago, Región Metropolitana (no "Buin") | Los reclutadores filtran por Santiago; Buin te deja fuera del filtro |
 | Sector | Bienes de consumo / Comercio al por mayor | Coherente con HNS |
 | "Abierto a" | Solo si buscas activamente | Si no, deja **Servicios** con "Marketing digital, Ecommerce, Publicidad" |
@@ -102,7 +104,7 @@ Solo se ven las primeras 2-3 líneas antes del "ver más". Ahí va el gancho.
 > Herramientas: Meta Ads · Google Ads · Shopify · GA4 · Canva · Metricool ·
 > Mailchimp · [agrega las tuyas]
 >
-> Conversemos: [correo] · [teléfono o "MD por acá"]
+> Conversemos: marketing@hnsnutrition.cl · [teléfono o "MD por acá"]
 
 ### Versión 2 — Autoridad de categoría (más corta, si prefieres sobriedad)
 
