@@ -54,3 +54,19 @@ Recomendaciones de producción:
 | 18 | Zorro motoquero delivery | Delivery / apps |
 | 19 | Robot diner años 50 | Retro-futurista |
 | 20 | Quiltro chileno con pañuelo | Identidad local |
+
+## 5. Mascota oficial: MYSI (`mascota-mysi/`)
+Hamburguesa con el mismo trazo grueso de marcador del logo y los colores de la marca. Viene en **vector (SVG)** y en PNG transparente de 2000 px, con 3 poses:
+- **Saludo** (bienvenida, "Hola, soy Mysi")
+- **A gusto** (pose firma con ojos cerrados, refuerza el concepto "mysa")
+- **Pulgar arriba** (reseñas, promos aprobadas)
+
+## 6. Kit de Instagram (`instagram/`)
+- `posts/` 1080×1350 (4:5): lanzamiento de producto, promo 2x1, frase "mysa (verbo)", presentación de Mysi, horarios, reseña, delivery, portada de carrusel del menú, meme.
+- `historias/` 1080×1920: promo con botón, encuesta (espacio para el sticker), "Mysi te recomienda".
+- `destacadas/` portadas en negro y café: Menú, Promos, Delivery, Local, Reseñas, Mysi.
+- `vista-previa-perfil.png`: cómo se ve el perfil completo.
+
+Ritmo del feed: alternar **negro → mostaza → crema** para un grid tipo damero. Proporción sugerida: 40% producto/foto, 30% promo, 30% marca (Mysi, frases, memes).
+Bio sugerida: "Smash burgers hechas a mano 🍔 Estar a gusto. 📍Buin · Local + Delivery 👇 Pide aquí".
+Horarios, precios y la reseña son de ejemplo: reemplazar por los reales.
