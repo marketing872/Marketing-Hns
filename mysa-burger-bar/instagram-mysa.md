@@ -1,21 +1,21 @@
-# Instagram · Mysa Burgers & Bar
+# Instagram · Mysa Burger Bar
 
 Basado en el branding de los artifacts de logos (Rondas 2 a 5 y Familia Café).
-**Marca:** Mysa Burgers & Bar · Buin, Chile · Est. 2026
-**Concepto:** smash burgers, coctelería y cerveza artesanal en un lugar cálido y acogedor. *Mysa* viene del sueco y significa estar a gusto, con los tuyos.
+**Marca:** Mysa Burger Bar · Buin, Chile · Est. 2026
+**Concepto:** hamburguesas artesanales, coctelería y cerveza artesanal en un lugar cálido y acogedor. *Mysa* viene del sueco y significa estar a gusto, con los tuyos.
 **Lo que hay que completar:** todo lo que va entre [corchetes] (dirección, horarios, precios reales, fecha de apertura) y la elección del logo final.
 
 ---
 
 ## 1. Perfil
 
-**Usuario sugerido:** @mysaburgers (alternativas: @mysa.burgersbar · @mysabuin)
-**Nombre visible:** Mysa Burgers & Bar | Buin (así también aparece en las búsquedas por "Buin")
+**Usuario:** @mysaburger_bar
+**Nombre visible:** Mysa Burger Bar | Buin (así también aparece en las búsquedas por "Buin")
 **Categoría:** Restaurante de hamburguesas
 
 **Bio (máx. 150 caracteres):**
 ```
-🍔 Smash burgers · 🍸 Cócteles · 🍺 Schop
+🍔 Hamburguesas artesanales · 🍸 Cócteles · 🍺 Schop
 Un lugar pa' quedarse 🤎
 📍 [Dirección], Buin
 🛵 Delivery y reservas 👇
@@ -65,7 +65,7 @@ Cercano, cálido, chileno y con humor suave. Le hablamos de "tú". Invitamos a q
 | Sí | No |
 |---|---|
 | "Pide otra ronda, que la noche es larga." | "¡¡¡LA MEJOR BURGER DE CHILE!!!" |
-| "Viernes, amigos y una smash doble." | Muchos emojis y mayúsculas |
+| "Viernes, amigos y una buena burger." | Muchos emojis y mayúsculas |
 | "Te guardamos mesa 🤎" | Lenguaje corporativo ("estimado cliente") |
 
 **Emojis de la marca:** 🍔 🍸 🍺 🤎 🔥 (el 🤎 café es el sello).
@@ -78,13 +78,13 @@ Se publican en este orden. La primera fila de la grilla queda arriba en el perfi
 
 | # | Formato | Contenido | Copy |
 |---|---|---|---|
-| 1 | Post | Logo sobre espresso | "Algo rico se está cocinando en Buin. 🤎 Mysa Burgers & Bar. Pronto." |
-| 2 | Reel | Teaser: plancha, humo, smash, sin mostrar el local | "Primero se escucha. Después se huele. [Fecha] abrimos. 🔥" |
+| 1 | Post | Logo sobre espresso | "Algo rico se está cocinando en Buin. 🤎 Mysa Burger Bar. Pronto." |
+| 2 | Reel | Teaser: carne a la parrilla, humo y queso derritiéndose, sin mostrar el local | "Primero se escucha. Después se huele. [Fecha] abrimos. 🔥" |
 | 3 | Carrusel | ¿Qué significa Mysa? (5 láminas) | "Mysa viene del sueco y significa estar a gusto, con los tuyos. Eso es lo que queremos que sientas acá. 🤎" |
 | 4 | Reel | Detrás de escena: armando el local | "Así va quedando tu nuevo lugar favorito en Buin. 👀" |
 | 5 | Post | Presentación de la mascota | "Les presentamos a [nombre de la mascota], la cara (y el hambre) de Mysa. Desde ahora te va a avisar de todo. 🍔" |
 | 6 | Carrusel | La carta, burger por burger | "La carta completa. Guárdala pa' cuando te dé hambre. 📌" |
-| 7 | Reel | La barra: un cóctel de la casa en preparación | "Burgers & BAR. No es de adorno. 🍸" |
+| 7 | Reel | La barra: un cóctel de la casa en preparación | "Burger BAR. No es de adorno. 🍸" |
 | 8 | Post | Fecha de apertura + concurso | Ver el concurso en la sección 7 |
 | 9 | Reel | Día de la apertura: gente, ambiente, brindis | "Gracias Buin. Esto recién empieza. 🤎" |
 
@@ -94,10 +94,10 @@ Se publican en este orden. La primera fila de la grilla queda arriba en el perfi
 
 | Pilar | % | Qué mostrar |
 |---|---|---|
-| 🍔 Antojo | 35 % | Cheese pull, smash en cámara lenta, cortes por la mitad, papas |
+| 🍔 Antojo | 35 % | Cheese pull, carne a la parrilla en cámara lenta, cortes por la mitad, papas |
 | 🍸 La barra | 15 % | Cócteles, schop, happy hour, el bartender |
 | 🤎 Detrás de escena | 15 % | Moler la carne, salsas, el equipo, la apertura del día |
-| 🔥 Promos y novedades | 15 % | Burger del mes, Martes Smash, eventos |
+| 🔥 Promos y novedades | 15 % | Burger del mes, Martes de Burger, eventos |
 | 👥 Comunidad | 15 % | Clientes, reseñas, cumpleaños, reposts |
 | 😄 Mascota y humor | 5 % | Memes y tendencias con la mascota |
 
@@ -111,16 +111,16 @@ Se publican en este orden. La primera fila de la grilla queda arriba en el perfi
 ### Semana 1: "Llegamos a Buin"
 | Día | Formato | Idea | Copy |
 |---|---|---|---|
-| Lun. | Reel | Smash en plancha en cámara lenta (ASMR) | "Este sonido es terapia. 🔥 ¿Ya viniste?" |
+| Lun. | Reel | Carne a la parrilla en cámara lenta (ASMR) | "Este sonido es terapia. 🔥 ¿Ya viniste?" |
 | Mié. | Carrusel | 5 razones para venir a Mysa | "Cinco razones. Bastaba con una. 🍔" |
-| Vie. | Reel | Viernes en Mysa: ambiente, brindis, risas | "Viernes, amigos y una smash doble. Te guardamos mesa. 🤎" |
+| Vie. | Reel | Viernes en Mysa: ambiente, brindis, risas | "Viernes, amigos y una buena burger. Te guardamos mesa. 🤎" |
 | Dom. | Post | Gracias por la primera semana (fotos de clientes) | "Primera semana y ya se sienten en casa. Gracias, Buin. 🤎" |
 
 ### Semana 2: "Hecho a mano"
 | Día | Formato | Idea | Copy |
 |---|---|---|---|
 | Lun. | Reel | Molemos la carne todos los días | "Carne fresca, molida cada mañana. Sin atajos. 🥩" |
-| Mié. | Post | Promo Martes Smash (plantilla caramelo) | "MARTES SMASH 🔥 2 smash burgers por $[precio]. Solo martes, en el local y para retiro." |
+| Mié. | Post | Promo Martes de Burger (plantilla caramelo) | "MARTES DE BURGER 🔥 2 burgers por $[precio]. Solo martes, en el local y para retiro." |
 | Vie. | Reel | El bartender preparando el cóctel de la casa | "Se llama [nombre del cóctel] y ya tiene fans. 🍸" |
 | Dom. | Carrusel | Las salsas de la casa | "Cuál es la tuya: ¿Mysa, BBQ, chipotle o ajo? Vota abajo 👇" |
 
@@ -151,7 +151,7 @@ Se publican en este orden. La primera fila de la grilla queda arriba en el perfi
 Celebramos que llegamos a Buin y te queremos invitar a ti y a 3 amigos a una noche en Mysa 🍔🍸
 
 Para participar:
-1️⃣ Sigue a @mysaburgers
+1️⃣ Sigue a @mysaburger_bar
 2️⃣ Dale like a esta publicación
 3️⃣ Etiqueta a 3 amigos con los que vendrías (cada comentario es una participación)
 ⭐ Extra: compártelo en tus historias y etiquétanos
@@ -165,11 +165,11 @@ Válido para mayores de 18 años. Concurso no patrocinado por Instagram.
 ## 8. Guiones de reels (listos para grabar)
 
 **Reel 1: "El sonido de Mysa" (7 a 10 s)**
-1. Bola de carne cae en la plancha (primer plano, audio original).
-2. La espátula aplasta: smash (cámara lenta).
+1. La carne cae a la parrilla (primer plano, audio original).
+2. Vuelta a la carne jugosa, humo y fuego (cámara lenta).
 3. Queso encima, se derrite.
 4. Tapa con el pan, corte por la mitad.
-5. Texto final: "Mysa Burgers & Bar · Buin". Audio: solo el sonido de la plancha, sin música.
+5. Texto final: "Mysa Burger Bar · Buin". Audio: solo el sonido de la parrilla, sin música.
 
 **Reel 2: "POV: dijiste solo una" (8 s)**
 1. Texto: "POV: le dijiste a tus amigos 'vamos, pero solo una'".
@@ -179,7 +179,7 @@ Válido para mayores de 18 años. Concurso no patrocinado por Instagram.
 **Reel 3: "Del grifo a tu mesa" (10 s)**
 1. Manilla del grifo, se tira el schop.
 2. Espuma perfecta, el vaso sobre el posavasos Mysa.
-3. Se sirve al lado de una burger. Texto: "Burgers & BAR. 🍺"
+3. Se sirve al lado de una burger. Texto: "Burger BAR. 🍺"
 
 **Reel 4: "Un día en Mysa" (15 a 20 s)**
 Abrir la cortina → moler la carne → preparar salsas → primeros clientes → noche con luces cálidas → cerrar. Texto: "De 12:00 a [hora], todos los días."
@@ -190,7 +190,7 @@ Abrir la cortina → moler la carne → preparar salsas → primeros clientes �
 
 | Hora | Historia |
 |---|---|
-| 11:30 | "Ya prendimos la plancha 🔥" + sticker de horario |
+| 11:30 | "Ya prendimos la parrilla 🔥" + sticker de horario |
 | 13:00 | Encuesta: "¿Simple o doble?" / "¿Papas o aros?" |
 | 17:00 | Promo del día o happy hour (plantilla) |
 | 20:00 | Ambiente en vivo del local + sticker de ubicación |
@@ -202,9 +202,9 @@ Abrir la cortina → moler la carne → preparar salsas → primeros clientes �
 
 ## 10. Hashtags
 
-**Marca:** #MysaBurgers #MomentoMysa
+**Marca:** #MysaBurgerBar #MomentoMysa
 **Locales:** #Buin #BuinChile #Paine #SanBernardo #MaipoChile #DondeComerBuin
-**Rubro:** #SmashBurger #Hamburguesas #BurgerBar #Cocteles #SchopChile #ComidaChile
+**Rubro:** #HamburguesasArtesanales #Hamburguesas #BurgerBar #Cocteles #SchopChile #ComidaChile
 Usar de 5 a 8 por publicación, mezclando los tres grupos. **Siempre etiquetar la ubicación** de Buin.
 
 ---
